@@ -58,51 +58,49 @@ const TextWrapper = () => {
 
 
   return (
-    <div className="px-5 h-full w-full bg-black/90 text-white">
-      <div className="h-full px-5 py-5 flex flex-col justify-center items-center">
-        <div className="my-2 text-center">
-          <p className="text-sm text-white/20">Просто текст для заголовкiв "Заголовок"</p>
-          <p className="text-sm text-white/20">"-" для пунктiв списку "-Пункт"</p>
+    <div className="mt-0 lg:mt-32 bg-[#191919]">
+      <div className="h-fit w-full pt-5 pb-10 lg:py-10 px-5 flex justify-center items-start flex-wrap gap-10">
+
+        <div className="flex flex-col w-full sm:w-4/6 lg:w-2/6">
+          <h1 className="mb-2 font-semibold text-white">Огорнути текст в HTML</h1>
+          {/* Поле ввода текста */}
+          <textarea
+            rows="10"
+            cols="50"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            placeholder="Введiть текст наступним чином:
+  Заголовок 
+  -пункт
+  -пункт
+  -пункт..."
+            className="w-full p-4 text-white mb-4 rounded-md bg-black/30 placeholder-white/20"
+          ></textarea>
+          {/* Кнопка для оборачивания текста */}
+          <button onClick={handleWrapText} className="py-2 px-3 bg-[#DB011C] text-white font-semibold">в HTML</button>
         </div>
-        <h1 className="mb-2 font-semibold">Огорнути текст в HTML</h1>
         
-        {/* Поле ввода текста */}
-        <textarea
-          rows="10"
-          cols="50"
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          placeholder="Введiть текст наступним чином:
+        <div className="flex flex-col w-full sm:w-4/6 lg:w-2/6">
+          <h1 className="mb-2 font-semibold text-white">Результат:</h1>
+          {/* Поле для вывода обернутого текста */}
+          <textarea
+            rows="10"
+            cols="50"
+            value={outputText}
+            readOnly
+            placeholder="Результат буде вiдображений тут..."
+            className="w-full p-4 text-white mb-4 rounded-md bg-black/30 placeholder-white/20"
+          ></textarea>
+          {/* Кнопка для копирования в буфер обмена */}
+          <button 
+            onClick={handleCopyToClipboard} 
+            className="flex items-center gap-2 self-center text-white"
+          >
+            <p>Cкопiювати</p>
+            {copyStatus === "+" ? <IoCheckmarkDone  className="text-green-500" /> : <IoCopy />}
+          </button>
+        </div>
 
-Заголовок 
--пункт
--пункт
--пункт..."
-          className="p-4 text-white mb-4 rounded-md bg-black/30 placeholder-white/20"
-        ></textarea>
-        
-        {/* Кнопка для оборачивания текста */}
-        <button onClick={handleWrapText} className="py-2 px-3 bg-[#DB011C] text-white font-semibold mb-5">в HTML</button>
-
-        <h2 className="mb-2 font-semibold">Результат:</h2>
-
-        {/* Поле для вывода обернутого текста */}
-        <textarea
-          rows="10"
-          cols="50"
-          value={outputText}
-          readOnly
-          placeholder="Результат будет отображен здесь..."
-          className="p-4 text-white mb-4 rounded-md bg-black/30 placeholder-white/20"
-        ></textarea>
-        {/* Кнопка для копирования в буфер обмена */}
-        <button 
-          onClick={handleCopyToClipboard} 
-          className="flex items-center gap-2"
-        >
-          <p>Cкопiювати</p>
-          {copyStatus === "+" ? <IoCheckmarkDone  className="text-green-500" /> : <IoCopy />}
-        </button>
       </div>
     </div>
   );
