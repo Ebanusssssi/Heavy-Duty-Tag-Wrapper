@@ -33,15 +33,17 @@ const TextWrapper = () => {
           isList = true;
         }
         result.push(`<li>${line.slice(1).trim()}</li>`);
-      }
-      // Если строка - заголовок
-      else if (line) {
-        result.push(`<p><b>${line}</b></p>`);
+      } else if (line) {
+        if (isList) {
+          result.push("</ul>"); // Закрываем список, если он был открыт
+          isList = false;
+        }
+        result.push(`<p><b>${line}</b></p>`) // Создаем заголовок
       }
     });
 
     if (isList) {
-      result.push("</ul>");
+      result.push("</ul>"); // Закрываем список, если он остался
     }
 
     setOutputText(result.join("\n")); // Преобразуем массив строк в финальный результат
