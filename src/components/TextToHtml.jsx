@@ -4,7 +4,6 @@ import Info from "./Info"
 
 import { IoCopy } from "react-icons/io5";
 import { IoCheckmarkDone } from "react-icons/io5";
-import { IoClose } from "react-icons/io5";
 import { FiSlash } from "react-icons/fi";
 
 
@@ -113,7 +112,7 @@ const TextWrapper = () => {
             copyStatus === "+" 
             ? <IoCheckmarkDone  className="text-green-500" /> 
             : copyStatus === "-" 
-            ? <FiSlash className="text-red-600 font-black"/>
+            ? <FiSlash className="text-[#DB011C] font-black"/>
             : <IoCopy />
             }
           </button>

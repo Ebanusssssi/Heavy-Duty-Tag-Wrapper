@@ -1,17 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { FiInfo } from "react-icons/fi";
 
 const InfoIcon = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    setAnimate(true); // Запускаем анимацию при монтировании компонента
+  }, []);
 
   return (
     <div
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={() => {setIsHovered(true); setAnimate(false)}}
       onMouseLeave={() => setIsHovered(false)}
       style={{ position: 'relative', display: 'inline-block' }}
     >
-      <FiInfo className='text-white text-lg' />
+      <FiInfo className={`text-white text-lg ${animate ? 'animate-pulse' : ''} cursor-pointer`} />
       {isHovered && (
         <div
           style={{
