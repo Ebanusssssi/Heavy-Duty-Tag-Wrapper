@@ -4,6 +4,11 @@ import Info from "./Info"
 
 import { IoCopy } from "react-icons/io5";
 import { IoCheckmarkDone } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
+import { FiSlash } from "react-icons/fi";
+
+
+
 
 
 
@@ -46,14 +51,15 @@ const TextWrapper = () => {
 
   // Функция для копирования текста в буфер обмена
   const handleCopyToClipboard = () => {
+    if (outputText.length === 0) {
+      setCopyStatus("-"); // Ошибка: текст пустой
+      setTimeout(() => setCopyStatus(null), 2000); // Сбросить статус через 2 секунды
+      return; // Выход из функции, чтобы не продолжать выполнение
+    }
+
     navigator.clipboard.writeText(outputText).then(
       () => {
         setCopyStatus("+"); // Успешное копирование
-        setTimeout(() => setCopyStatus(null), 2000); // Сбросить статус через 2 секунды
-      },
-      (err) => {
-        setCopyStatus("-"); // Ошибка при копировании
-        alert("Не вдалося скопiюватиб помилка: ", err)
         setTimeout(() => setCopyStatus(null), 2000); // Сбросить статус через 2 секунды
       }
     );
@@ -103,7 +109,13 @@ const TextWrapper = () => {
             className="flex items-center gap-2 self-center text-white"
           >
             <p>Cкопiювати</p>
-            {copyStatus === "+" ? <IoCheckmarkDone  className="text-green-500" /> : <IoCopy />}
+            {
+            copyStatus === "+" 
+            ? <IoCheckmarkDone  className="text-green-500" /> 
+            : copyStatus === "-" 
+            ? <FiSlash className="text-red-600 font-black"/>
+            : <IoCopy />
+            }
           </button>
         </div>
 
