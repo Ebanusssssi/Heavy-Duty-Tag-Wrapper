@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
+import Info from "./Info"
 
 import { IoCopy } from "react-icons/io5";
 import { IoCheckmarkDone } from "react-icons/io5";
@@ -17,7 +19,7 @@ const TextWrapper = () => {
     let result = [];
     let isList = false;
 
-    lines.forEach((line, index) => {
+    lines.forEach((line) => {
       line = line.trim();
 
       // Если строка - это пункт списка
@@ -51,6 +53,7 @@ const TextWrapper = () => {
       },
       (err) => {
         setCopyStatus("-"); // Ошибка при копировании
+        alert("Не вдалося скопiюватиб помилка: ", err)
         setTimeout(() => setCopyStatus(null), 2000); // Сбросить статус через 2 секунды
       }
     );
@@ -58,11 +61,14 @@ const TextWrapper = () => {
 
 
   return (
-    <div className="mt-0 lg:mt-32 bg-[#191919]">
-      <div className="h-fit w-full pt-5 pb-10 lg:py-10 px-5 flex justify-center items-start flex-wrap gap-10">
+    <div className="bg-[#191919]">
+      <div className="h-fit py-5 w-full lg:py-10 px-5 flex justify-center items-start flex-wrap gap-5 lg:gap-10">
 
         <div className="flex flex-col w-full sm:w-4/6 lg:w-2/6">
-          <h1 className="mb-2 font-semibold text-white">Огорнути текст в HTML</h1>
+          <div className="h-fit flex items-center gap-2">
+            <h1 className="font-semibold text-white">Огорнути текст в HTML</h1>
+            <Info />
+          </div>
           {/* Поле ввода текста */}
           <textarea
             rows="10"
@@ -74,7 +80,7 @@ const TextWrapper = () => {
   -пункт
   -пункт
   -пункт..."
-            className="w-full p-4 text-white mb-4 rounded-md bg-black/30 placeholder-white/20"
+            className="w-full p-4 mt-2 text-white mb-4 rounded-md bg-black/30 placeholder-white/20"
           ></textarea>
           {/* Кнопка для оборачивания текста */}
           <button onClick={handleWrapText} className="py-2 px-3 bg-[#DB011C] text-white font-semibold">в HTML</button>
